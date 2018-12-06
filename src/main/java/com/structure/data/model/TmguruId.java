@@ -1,5 +1,5 @@
 package com.structure.data.model;
-// Generated Dec 1, 2018 6:03:33 PM by Hibernate Tools 4.3.5.Final
+// Generated Dec 6, 2018 11:18:35 PM by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,12 +11,12 @@ import javax.persistence.Embeddable;
 public class TmguruId implements java.io.Serializable {
 
 	private String idGuru;
-	private int nip;
+	private String nip;
 
 	public TmguruId() {
 	}
 
-	public TmguruId(String idGuru, int nip) {
+	public TmguruId(String idGuru, String nip) {
 		this.idGuru = idGuru;
 		this.nip = nip;
 	}
@@ -30,12 +30,12 @@ public class TmguruId implements java.io.Serializable {
 		this.idGuru = idGuru;
 	}
 
-	@Column(name = "NIP", nullable = false)
-	public int getNip() {
+	@Column(name = "NIP", nullable = false, length = 11)
+	public String getNip() {
 		return this.nip;
 	}
 
-	public void setNip(int nip) {
+	public void setNip(String nip) {
 		this.nip = nip;
 	}
 
@@ -50,14 +50,15 @@ public class TmguruId implements java.io.Serializable {
 
 		return ((this.getIdGuru() == castOther.getIdGuru()) || (this.getIdGuru() != null
 				&& castOther.getIdGuru() != null && this.getIdGuru().equals(castOther.getIdGuru())))
-				&& (this.getNip() == castOther.getNip());
+				&& ((this.getNip() == castOther.getNip()) || (this.getNip() != null && castOther.getNip() != null
+						&& this.getNip().equals(castOther.getNip())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
 		result = 37 * result + (getIdGuru() == null ? 0 : this.getIdGuru().hashCode());
-		result = 37 * result + this.getNip();
+		result = 37 * result + (getNip() == null ? 0 : this.getNip().hashCode());
 		return result;
 	}
 

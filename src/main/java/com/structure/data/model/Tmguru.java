@@ -1,5 +1,5 @@
 package com.structure.data.model;
-// Generated Dec 1, 2018 6:03:33 PM by Hibernate Tools 4.3.5.Final
+// Generated Dec 6, 2018 11:18:35 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -48,7 +48,7 @@ public class Tmguru implements java.io.Serializable {
 
 	@AttributeOverrides({
 			@AttributeOverride(name = "idGuru", column = @Column(name = "ID_GURU", nullable = false, length = 10)),
-			@AttributeOverride(name = "nip", column = @Column(name = "NIP", nullable = false)) })
+			@AttributeOverride(name = "nip", column = @Column(name = "NIP", nullable = false, length = 11)) })
 	public TmguruId getId() {
 		return this.id;
 	}

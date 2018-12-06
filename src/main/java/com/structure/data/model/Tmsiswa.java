@@ -1,5 +1,5 @@
 package com.structure.data.model;
-// Generated Dec 1, 2018 6:03:33 PM by Hibernate Tools 4.3.5.Final
+// Generated Dec 6, 2018 11:18:35 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -32,6 +32,7 @@ public class Tmsiswa implements java.io.Serializable {
 	private Date createdDt;
 	private String modifiedBy;
 	private Date modifiedDt;
+	private String asalSekolah;
 
 	public Tmsiswa() {
 	}
@@ -42,7 +43,7 @@ public class Tmsiswa implements java.io.Serializable {
 
 	public Tmsiswa(TmsiswaId id, String nama, Character jenisKelamin, String tempatLahir, Date tglLahir, String agama,
 			String alamat, String kecamatan, Integer kodePos, String kelas, String createdBy, Date createdDt,
-			String modifiedBy, Date modifiedDt) {
+			String modifiedBy, Date modifiedDt, String asalSekolah) {
 		this.id = id;
 		this.nama = nama;
 		this.jenisKelamin = jenisKelamin;
@@ -57,6 +58,7 @@ public class Tmsiswa implements java.io.Serializable {
 		this.createdDt = createdDt;
 		this.modifiedBy = modifiedBy;
 		this.modifiedDt = modifiedDt;
+		this.asalSekolah = asalSekolah;
 	}
 
 	@EmbeddedId
@@ -190,6 +192,15 @@ public class Tmsiswa implements java.io.Serializable {
 
 	public void setModifiedDt(Date modifiedDt) {
 		this.modifiedDt = modifiedDt;
+	}
+
+	@Column(name = "ASAL_SEKOLAH", length = 50)
+	public String getAsalSekolah() {
+		return this.asalSekolah;
+	}
+
+	public void setAsalSekolah(String asalSekolah) {
+		this.asalSekolah = asalSekolah;
 	}
 
 }

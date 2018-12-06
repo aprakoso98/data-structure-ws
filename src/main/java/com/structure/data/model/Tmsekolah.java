@@ -1,5 +1,5 @@
 package com.structure.data.model;
-// Generated Dec 1, 2018 6:03:33 PM by Hibernate Tools 4.3.5.Final
+// Generated Dec 6, 2018 11:18:35 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tmsekolah", catalog = "sdn_pasirkaliki")
 public class Tmsekolah implements java.io.Serializable {
 
-	private int idSekolah;
+	private String idSekolah;
 	private String namaSekolah;
 	private String alamat;
 	private Date tglBerdiri;
@@ -28,11 +28,11 @@ public class Tmsekolah implements java.io.Serializable {
 	public Tmsekolah() {
 	}
 
-	public Tmsekolah(int idSekolah) {
+	public Tmsekolah(String idSekolah) {
 		this.idSekolah = idSekolah;
 	}
 
-	public Tmsekolah(int idSekolah, String namaSekolah, String alamat, Date tglBerdiri, String createdBy,
+	public Tmsekolah(String idSekolah, String namaSekolah, String alamat, Date tglBerdiri, String createdBy,
 			Date createdDt, String modifiedBy, Date modifiedDt) {
 		this.idSekolah = idSekolah;
 		this.namaSekolah = namaSekolah;
@@ -46,12 +46,12 @@ public class Tmsekolah implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "ID_SEKOLAH", unique = true, nullable = false)
-	public int getIdSekolah() {
+	@Column(name = "ID_SEKOLAH", unique = true, nullable = false, length = 6)
+	public String getIdSekolah() {
 		return this.idSekolah;
 	}
 
-	public void setIdSekolah(int idSekolah) {
+	public void setIdSekolah(String idSekolah) {
 		this.idSekolah = idSekolah;
 	}
 
@@ -64,7 +64,7 @@ public class Tmsekolah implements java.io.Serializable {
 		this.namaSekolah = namaSekolah;
 	}
 
-	@Column(name = "ALAMAT", length = 50)
+	@Column(name = "ALAMAT", length = 80)
 	public String getAlamat() {
 		return this.alamat;
 	}
