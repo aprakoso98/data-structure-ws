@@ -22,8 +22,27 @@ public class KelasRest {
 	@Autowired
 	private TmkelasDao tmkelasDao;
 
-	@RequestMapping(value = "/id", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public @ResponseBody List<com.structure.data.entity.Tmkelas> getAllKelas() {
+		List<com.structure.data.entity.Tmkelas> kelasDtos = new ArrayList<>();
+
+		List<Tmkelas> tmkelases = (List<Tmkelas>) tmkelasDao.findAll();
+
+		for (Tmkelas tmkelas : tmkelases) {
+			com.structure.data.entity.Tmkelas kelasDto = new com.structure.data.entity.Tmkelas();
+			kelasDto.setIdKelas(tmkelas.getIdKelas());
+			kelasDto.setIdWalikelas(tmkelas.getIdWalikelas());
+			kelasDto.setJumlahKursi(tmkelas.getJumlahKursi());
+			kelasDto.setJumlahMeja(tmkelas.getJumlahMeja());
+
+			kelasDtos.add(kelasDto);
+		}
+
+		return kelasDtos;
+	}
+
+	@RequestMapping(value = "/id", method = RequestMethod.GET)
+	public @ResponseBody List<com.structure.data.entity.Tmkelas> getKelasId() {
 		List<com.structure.data.entity.Tmkelas> kelasDtos = new ArrayList<>();
 
 		List<Tmkelas> tmkelases = (List<Tmkelas>) tmkelasDao.findAll();
