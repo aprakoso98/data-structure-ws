@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "46ab10b4-e1f7-4d3a-a432-656a811082b7",
+		"_postman_id": "f42c9fd7-c865-46ec-8e2c-83555c0d395c",
 		"name": "DATA_STRUCTURE_COLLECTION",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -25,12 +25,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/siswa/all",
+					"raw": "http://localhost:20000/data-structure-ws/rest/siswa/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
@@ -59,17 +59,51 @@
 					"raw": "{\n\t\"search\":{\n\t\t\"kelas\":\"6.a\"\n\t}\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/siswa/find-by-kelas",
+					"raw": "http://localhost:20000/data-structure-ws/rest/siswa/find-by-kelas",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
 						"siswa",
 						"find-by-kelas"
+					]
+				},
+				"description": "Service untuk mengambil semua siswa berdasarkan kelas"
+			},
+			"response": []
+		},
+		{
+			"name": "Service Siswa Count By Kelas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"search\":{\n\t\t\"kelas\":\"6.a\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:20000/data-structure-ws/rest/siswa/count-by-kelas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "20000",
+					"path": [
+						"data-structure-ws",
+						"rest",
+						"siswa",
+						"count-by-kelas"
 					]
 				},
 				"description": "Service untuk mengambil semua siswa berdasarkan kelas"
@@ -93,12 +127,12 @@
 					"raw": "{\r\n\t\"NIS\":\"001\",\r\n\t\"NISN\":\"002\",\r\n\t\"Nama\":\"Rizal\",\r\n\t\"Jenis Kelamin\":\"L\",\r\n\t\"Tempat Lahir\":\"Batam\",\r\n\t\"Tanggal Lahir\":\"22-10-1995\",\r\n\t\"Agama\":\"Islam\",\r\n\t\"Alamat\":\"Perumnas#Sukaluyu#41238\",\r\n\t\"Kelas\":\"7.a\",\r\n\t\"Asal Sekolah\":\"SD Nagasari\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/siswa/insert-or-update",
+					"raw": "http://localhost:20000/data-structure-ws/rest/siswa/insert-or-update",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
@@ -127,12 +161,12 @@
 					"raw": "{\r\n\t\"NIS\":\"001\",\r\n\t\"NISN\":\"002\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/siswa/delete",
+					"raw": "http://localhost:20000/data-structure-ws/rest/siswa/delete",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
@@ -154,17 +188,17 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/kelas/id",
+					"raw": "http://localhost:20000/data-structure-ws/rest/kelas/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
 						"kelas",
-						"id"
+						"all"
 					]
 				},
 				"description": "Service untuk mengambil semua data kelas"
@@ -188,12 +222,12 @@
 					"raw": "{\n\t\"idKelas\":\"7.a\",\n\t\"idWalikelas\":\"6U0003\",\n\t\"jumlahKursi\":10,\n\t\"jumlahMeja\":10\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/kelas/insert-or-update",
+					"raw": "http://localhost:20000/data-structure-ws/rest/kelas/insert-or-update",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
@@ -222,12 +256,12 @@
 					"raw": "{\n\t\"idKelas\":\"7.a\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/kelas/delete",
+					"raw": "http://localhost:20000/data-structure-ws/rest/kelas/delete",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
@@ -259,12 +293,12 @@
 					"raw": "{\n\t\"search\":{\n\t\t\"kelas\":\"6.a\"\n\t}\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/guru/id",
+					"raw": "http://localhost:20000/data-structure-ws/rest/guru/id",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
@@ -293,12 +327,12 @@
 					"raw": "{\n\t\"idGuru\":\"2\",\n\t\"nip\":\"NIP0001\",\n\t\"namaGuru\":\"Fachrizal\",\n\t\"alamat\":\"Perumnas\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/guru/insert-or-update",
+					"raw": "http://localhost:20000/data-structure-ws/rest/guru/insert-or-update",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
@@ -327,12 +361,12 @@
 					"raw": "{\n\t\"idGuru\":\"2\",\n\t\"nip\":\"NIP0001\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/guru/delete",
+					"raw": "http://localhost:20000/data-structure-ws/rest/guru/delete",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
@@ -361,20 +395,57 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"search\":{\n\t\t\"kelas\":\"6.a\"\n\t}\n}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8082/data-structure-ws/rest/wali-siswa/all",
+					"raw": "http://localhost:20000/data-structure-ws/rest/wali-siswa/all",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8082",
+					"port": "20000",
 					"path": [
 						"data-structure-ws",
 						"rest",
 						"wali-siswa",
 						"all"
+					]
+				},
+				"description": "Service untuk mengambil semua data guru"
+			},
+			"response": []
+		},
+		{
+			"name": "Service Export Mutasi Siswa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:20000/data-structure-ws/rest/mutasi/export",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "20000",
+					"path": [
+						"data-structure-ws",
+						"rest",
+						"mutasi",
+						"export"
 					]
 				},
 				"description": "Service untuk mengambil semua data guru"
