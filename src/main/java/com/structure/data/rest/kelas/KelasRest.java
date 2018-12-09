@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.structure.data.model.Tmkelas;
 import com.structure.data.repository.TmkelasDao;
+import com.structure.data.util.DataTablesResponse;
 
 @Controller
 @RequestMapping("/rest/kelas")
@@ -23,7 +24,14 @@ public class KelasRest {
 	private TmkelasDao tmkelasDao;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public @ResponseBody List<com.structure.data.entity.Tmkelas> getAllKelas() {
+	public @ResponseBody DataTablesResponse getAllKelas() {
+		DataTablesResponse response = new DataTablesResponse();
+		List<String> column = new ArrayList<>();
+		column.add("ID Kelas");
+		column.add("ID Wali Kelas");
+		column.add("Jumlah Kursi");
+		column.add("Jumlah Meja");
+
 		List<com.structure.data.entity.Tmkelas> kelasDtos = new ArrayList<>();
 
 		List<Tmkelas> tmkelases = (List<Tmkelas>) tmkelasDao.findAll();
@@ -37,8 +45,11 @@ public class KelasRest {
 
 			kelasDtos.add(kelasDto);
 		}
+		
+		response.setColumn(column);
+		response.setData(kelasDtos);
 
-		return kelasDtos;
+		return response;
 	}
 
 	@RequestMapping(value = "/id", method = RequestMethod.GET)

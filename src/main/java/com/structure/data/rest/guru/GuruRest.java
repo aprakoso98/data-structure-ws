@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.structure.data.model.Tmguru;
 import com.structure.data.model.TmguruId;
 import com.structure.data.repository.TmguruDao;
+import com.structure.data.util.DataTablesResponse;
 
 @Controller
 @RequestMapping("/rest/guru")
@@ -24,9 +25,15 @@ public class GuruRest {
 	private TmguruDao tmguruDao;
 
 	@RequestMapping(value = "/id", method = RequestMethod.GET)
-	public @ResponseBody List<com.structure.data.entity.Tmguru> getAllGuru() {
-		List<com.structure.data.entity.Tmguru> guruDtos = new ArrayList<>();
+	public @ResponseBody DataTablesResponse getAllGuru() {
+		DataTablesResponse response = new DataTablesResponse();
+		List<String> column = new ArrayList<>();
+		column.add("ID Guru");
+		column.add("NIP");
+		column.add("Nama Guru");
+		column.add("Alamat");
 
+		List<com.structure.data.entity.Tmguru> guruDtos = new ArrayList<>();
 		List<Tmguru> tmgurus = (List<Tmguru>) tmguruDao.findAll();
 
 		for (Tmguru tmguru : tmgurus) {
@@ -38,8 +45,11 @@ public class GuruRest {
 
 			guruDtos.add(guruDto);
 		}
+		
+		response.setColumn(column);
+		response.setData(guruDtos);
 
-		return guruDtos;
+		return response;
 	}
 
 	@RequestMapping(value = "/insert-or-update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

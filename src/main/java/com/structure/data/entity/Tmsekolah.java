@@ -2,6 +2,7 @@ package com.structure.data.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.structure.data.util.CustomDateJsonDeserializer;
@@ -9,11 +10,18 @@ import com.structure.data.util.CustomDateJsonSerializer;
 
 public class Tmsekolah {
 
+	@JsonProperty("ID Sekolah")
 	private String idSekolah;
+
+	@JsonProperty("Nama Sekolah")
 	private String namaSekolah;
+
+	@JsonProperty("Alamat")
 	private String alamat;
+
 	@JsonSerialize(using = CustomDateJsonSerializer.class)
-    @JsonDeserialize(using = CustomDateJsonDeserializer.class)
+	@JsonDeserialize(using = CustomDateJsonDeserializer.class)
+	@JsonProperty("Tanggal Berdiri")
 	private Date tglBerdiri;
 
 	public String getIdSekolah() {

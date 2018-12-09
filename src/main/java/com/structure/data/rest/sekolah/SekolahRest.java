@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.structure.data.model.Tmsekolah;
 import com.structure.data.repository.TmsekolahDao;
+import com.structure.data.util.DataTablesResponse;
 
 @Controller
 @RequestMapping("/rest/sekolah")
@@ -22,8 +23,15 @@ public class SekolahRest {
 	@Autowired
 	private TmsekolahDao tmsekolahDao;
 
-	@RequestMapping(value = "/id", method = RequestMethod.GET)
-	public @ResponseBody List<com.structure.data.entity.Tmsekolah> getAllSekolah() {
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public @ResponseBody DataTablesResponse getAllSekolah() {
+		DataTablesResponse response = new DataTablesResponse();
+		List<String> column = new ArrayList<>();
+		column.add("ID Sekolah");
+		column.add("Nama Sekolah");
+		column.add("Alamat");
+		column.add("Tanggal Berdiri");
+
 		List<com.structure.data.entity.Tmsekolah> sekolahDtos = new ArrayList<>();
 
 		List<Tmsekolah> tmsekolahs = (List<Tmsekolah>) tmsekolahDao.findAll();
@@ -37,8 +45,10 @@ public class SekolahRest {
 
 			sekolahDtos.add(sekolahDto);
 		}
+		response.setColumn(column);
+		response.setData(sekolahDtos);
 
-		return sekolahDtos;
+		return response;
 	}
 
 	@RequestMapping(value = "/insert-or-update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

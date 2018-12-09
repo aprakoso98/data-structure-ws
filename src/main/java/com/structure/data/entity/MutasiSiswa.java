@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.structure.data.util.CustomDateJsonDeserializer;
 import com.structure.data.util.CustomDateJsonSerializer;
 
-public class Tmsiswa {
+public class MutasiSiswa {
 
 	@JsonProperty("NIS")
 	private String nis;
@@ -42,15 +42,15 @@ public class Tmsiswa {
 	@JsonProperty("Asal Sekolah")
 	private String asalSekolah;
 
-//	@JsonProperty("Created Date")
-//	@JsonSerialize(using = CustomDateJsonSerializer.class)
-//	@JsonDeserialize(using = CustomDateJsonDeserializer.class)
-//	private Date createdDt;
+	@JsonProperty("Created Date")
+	@JsonSerialize(using = CustomDateJsonSerializer.class)
+	@JsonDeserialize(using = CustomDateJsonDeserializer.class)
+	private Date createdDt;
 
-//	@JsonProperty("Modified Date")
-//	@JsonSerialize(using = CustomDateJsonSerializer.class)
-//	@JsonDeserialize(using = CustomDateJsonDeserializer.class)
-//	private Date modifiedDt;
+	@JsonProperty("Modified Date")
+	@JsonSerialize(using = CustomDateJsonSerializer.class)
+	@JsonDeserialize(using = CustomDateJsonDeserializer.class)
+	private Date modifiedDt;
 
 	@JsonProperty("Status")
 	private String status;
@@ -133,6 +133,22 @@ public class Tmsiswa {
 
 	public void setAsalSekolah(String asalSekolah) {
 		this.asalSekolah = asalSekolah;
+	}
+
+	public Date getCreatedDt() {
+		return createdDt;
+	}
+
+	public void setCreatedDt(Date createdDt) {
+		this.createdDt = createdDt;
+	}
+
+	public Date getModifiedDt() {
+		return modifiedDt;
+	}
+
+	public void setModifiedDt(Date modifiedDt) {
+		this.modifiedDt = modifiedDt;
 	}
 
 	public String getStatus() {

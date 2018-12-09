@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.structure.data.model.Tmwalisiswa;
 import com.structure.data.repository.TmwalisiswaDao;
+import com.structure.data.util.DataTablesResponse;
 
 @Controller
 @RequestMapping("/rest/wali-siswa")
@@ -23,7 +24,23 @@ public class WaliSiswaRest {
 	private TmwalisiswaDao tmwalisiswaDao;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public @ResponseBody List<com.structure.data.entity.Tmwalisiswa> getAllWaliSiswa() {
+	public @ResponseBody DataTablesResponse getAllWaliSiswa() {
+		DataTablesResponse response = new DataTablesResponse();
+		List<String> column = new ArrayList<>();
+		column.add("NIS");
+		column.add("Nama Ayah");
+		column.add("Tahun Lahir Ayah");
+		column.add("Pendidikan Ayah");
+		column.add("Pekerjaan Ayah");
+		column.add("Penghasilan Min Ayah");
+		column.add("Penghasilan Max Ayah");
+		column.add("Nama Ibu");
+		column.add("Tahun Lahir Ibu");
+		column.add("Pendidikan Ibu");
+		column.add("Pekerjaan Ibu");
+		column.add("Penghasilan Min Ibu");
+		column.add("Penghasilan Max Ibu");
+		
 		List<com.structure.data.entity.Tmwalisiswa> walisiswaDtos = new ArrayList<>();
 
 		List<Tmwalisiswa> tmwalisiswas = (List<Tmwalisiswa>) tmwalisiswaDao.findAll();
@@ -46,8 +63,11 @@ public class WaliSiswaRest {
 
 			walisiswaDtos.add(walisiswaDto);
 		}
+		
+		response.setColumn(column);
+		response.setData(walisiswaDtos);
 
-		return walisiswaDtos;
+		return response;
 	}
 
 	@RequestMapping(value = "/insert-or-update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

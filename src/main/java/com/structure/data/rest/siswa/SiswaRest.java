@@ -16,6 +16,7 @@ import com.structure.data.model.Tmsiswa;
 import com.structure.data.model.TmsiswaId;
 import com.structure.data.repository.TmsiswaDao;
 import com.structure.data.util.DataTablesRequest;
+import com.structure.data.util.DataTablesResponse;
 
 @Controller
 @RequestMapping("/rest/siswa")
@@ -25,7 +26,21 @@ public class SiswaRest {
 	private TmsiswaDao tmsiswaDao;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public @ResponseBody List<com.structure.data.entity.Tmsiswa> getAllSiswa() {
+	public @ResponseBody DataTablesResponse getAllSiswa() {
+		DataTablesResponse response = new DataTablesResponse();
+		List<String> column = new ArrayList<>();
+		column.add("NIS");
+		column.add("NISN");
+		column.add("Nama");
+		column.add("Jenis Kelamin");
+		column.add("Tempat Lahir");
+		column.add("Tanggal Lahir");
+		column.add("Agama");
+		column.add("Alamat");
+		column.add("Kelas");
+		column.add("Asal Sekolah");
+		column.add("Status");
+
 		List<com.structure.data.entity.Tmsiswa> studentDtos = new ArrayList<>();
 
 		List<Tmsiswa> tmsiswas = (List<Tmsiswa>) tmsiswaDao.findAll();
@@ -37,20 +52,38 @@ public class SiswaRest {
 			studentDto.setNama(tmsiswa.getNama());
 			studentDto.setJenisKelamin(tmsiswa.getJenisKelamin());
 			studentDto.setTempatLahir(tmsiswa.getTempatLahir());
+			studentDto.setTglLahir(tmsiswa.getTglLahir());
 			studentDto.setAgama(tmsiswa.getAgama());
-			studentDto.setAlamat(tmsiswa.getAlamat() + " " + tmsiswa.getKecamatan() + " " + tmsiswa.getKodePos());
+			studentDto.setAlamat(tmsiswa.getAlamat());
 			studentDto.setKelas(tmsiswa.getKelas());
 			studentDto.setAsalSekolah(tmsiswa.getAsalSekolah());
+			studentDto.setStatus(tmsiswa.getStatus());
 
 			studentDtos.add(studentDto);
 		}
 
-		return studentDtos;
+		response.setColumn(column);
+		response.setData(studentDtos);
+
+		return response;
 	}
 
 	@RequestMapping(value = "/find-by-kelas", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<com.structure.data.entity.Tmsiswa> getStudentById(
-			@RequestBody(required = false) DataTablesRequest req) {
+	public @ResponseBody DataTablesResponse getSiswaByKelas(@RequestBody(required = false) DataTablesRequest req) {
+		DataTablesResponse response = new DataTablesResponse();
+		List<String> column = new ArrayList<>();
+		column.add("NIS");
+		column.add("NISN");
+		column.add("Nama");
+		column.add("Jenis Kelamin");
+		column.add("Tempat Lahir");
+		column.add("Tanggal Lahir");
+		column.add("Agama");
+		column.add("Alamat");
+		column.add("Kelas");
+		column.add("Asal Sekolah");
+		column.add("Status");
+
 		List<com.structure.data.entity.Tmsiswa> studentDtos = new ArrayList<>();
 
 		List<Tmsiswa> tmsiswas = tmsiswaDao.findByKelas(req.getSearch().get("kelas").toString());
@@ -62,15 +95,20 @@ public class SiswaRest {
 			studentDto.setNama(tmsiswa.getNama());
 			studentDto.setJenisKelamin(tmsiswa.getJenisKelamin());
 			studentDto.setTempatLahir(tmsiswa.getTempatLahir());
+			studentDto.setTglLahir(tmsiswa.getTglLahir());
 			studentDto.setAgama(tmsiswa.getAgama());
-			studentDto.setAlamat(tmsiswa.getAlamat() + " " + tmsiswa.getKecamatan() + " " + tmsiswa.getKodePos());
+			studentDto.setAlamat(tmsiswa.getAlamat());
 			studentDto.setKelas(tmsiswa.getKelas());
 			studentDto.setAsalSekolah(tmsiswa.getAsalSekolah());
+			studentDto.setStatus(tmsiswa.getStatus());
 
 			studentDtos.add(studentDto);
 		}
 
-		return studentDtos;
+		response.setColumn(column);
+		response.setData(studentDtos);
+
+		return response;
 	}
 
 	@RequestMapping(value = "/insert-or-update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -89,15 +127,12 @@ public class SiswaRest {
 			tmsiswa.setTempatLahir(data.getTempatLahir());
 			tmsiswa.setTglLahir(data.getTglLahir());
 			tmsiswa.setAgama(data.getAgama());
-			System.out.println("Alamat : " + data.getAlamat());
-			String[] alamats = data.getAlamat().split("#");
-			tmsiswa.setAlamat(alamats[0]);
-			tmsiswa.setKecamatan(alamats[1]);
-			tmsiswa.setKodePos(Integer.parseInt(alamats[2]));
+			tmsiswa.setAlamat(data.getAlamat());
 			tmsiswa.setKelas(data.getKelas());
 			tmsiswa.setCreatedBy("Admin");
 			tmsiswa.setCreatedDt(new Date());
 			tmsiswa.setAsalSekolah(data.getAsalSekolah());
+			tmsiswa.setStatus(data.getStatus());
 
 		} else {
 			tmsiswa.setNama(data.getNama());
@@ -105,14 +140,12 @@ public class SiswaRest {
 			tmsiswa.setTempatLahir(data.getTempatLahir());
 			tmsiswa.setTglLahir(data.getTglLahir());
 			tmsiswa.setAgama(data.getAgama());
-			String[] alamats = data.getAlamat().split("#");
-			tmsiswa.setAlamat(alamats[0]);
-			tmsiswa.setKecamatan(alamats[1]);
-			tmsiswa.setKodePos(Integer.parseInt(alamats[2]));
+			tmsiswa.setAlamat(data.getAlamat());
 			tmsiswa.setKelas(data.getKelas());
 			tmsiswa.setModifiedBy("Admin");
 			tmsiswa.setModifiedDt(new Date());
 			tmsiswa.setAsalSekolah(data.getAsalSekolah());
+			tmsiswa.setStatus(data.getStatus());
 		}
 
 		tmsiswaDao.save(tmsiswa);

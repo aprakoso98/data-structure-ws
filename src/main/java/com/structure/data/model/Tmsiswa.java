@@ -1,5 +1,5 @@
 package com.structure.data.model;
-// Generated Dec 6, 2018 11:18:35 PM by Hibernate Tools 4.3.5.Final
+// Generated Dec 8, 2018 2:09:31 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -20,30 +20,30 @@ public class Tmsiswa implements java.io.Serializable {
 
 	private TmsiswaId id;
 	private String nama;
-	private Character jenisKelamin;
+	private String jenisKelamin;
 	private String tempatLahir;
 	private Date tglLahir;
 	private String agama;
 	private String alamat;
-	private String kecamatan;
-	private Integer kodePos;
 	private String kelas;
 	private String createdBy;
 	private Date createdDt;
 	private String modifiedBy;
 	private Date modifiedDt;
 	private String asalSekolah;
+	private String status;
 
 	public Tmsiswa() {
 	}
 
-	public Tmsiswa(TmsiswaId id) {
+	public Tmsiswa(TmsiswaId id, String status) {
 		this.id = id;
+		this.status = status;
 	}
 
-	public Tmsiswa(TmsiswaId id, String nama, Character jenisKelamin, String tempatLahir, Date tglLahir, String agama,
-			String alamat, String kecamatan, Integer kodePos, String kelas, String createdBy, Date createdDt,
-			String modifiedBy, Date modifiedDt, String asalSekolah) {
+	public Tmsiswa(TmsiswaId id, String nama, String jenisKelamin, String tempatLahir, Date tglLahir, String agama,
+			String alamat, String kelas, String createdBy, Date createdDt, String modifiedBy, Date modifiedDt,
+			String asalSekolah, String status) {
 		this.id = id;
 		this.nama = nama;
 		this.jenisKelamin = jenisKelamin;
@@ -51,14 +51,13 @@ public class Tmsiswa implements java.io.Serializable {
 		this.tglLahir = tglLahir;
 		this.agama = agama;
 		this.alamat = alamat;
-		this.kecamatan = kecamatan;
-		this.kodePos = kodePos;
 		this.kelas = kelas;
 		this.createdBy = createdBy;
 		this.createdDt = createdDt;
 		this.modifiedBy = modifiedBy;
 		this.modifiedDt = modifiedDt;
 		this.asalSekolah = asalSekolah;
+		this.status = status;
 	}
 
 	@EmbeddedId
@@ -84,11 +83,11 @@ public class Tmsiswa implements java.io.Serializable {
 	}
 
 	@Column(name = "JENIS_KELAMIN", length = 1)
-	public Character getJenisKelamin() {
+	public String getJenisKelamin() {
 		return this.jenisKelamin;
 	}
 
-	public void setJenisKelamin(Character jenisKelamin) {
+	public void setJenisKelamin(String jenisKelamin) {
 		this.jenisKelamin = jenisKelamin;
 	}
 
@@ -127,24 +126,6 @@ public class Tmsiswa implements java.io.Serializable {
 
 	public void setAlamat(String alamat) {
 		this.alamat = alamat;
-	}
-
-	@Column(name = "KECAMATAN", length = 50)
-	public String getKecamatan() {
-		return this.kecamatan;
-	}
-
-	public void setKecamatan(String kecamatan) {
-		this.kecamatan = kecamatan;
-	}
-
-	@Column(name = "KODE_POS")
-	public Integer getKodePos() {
-		return this.kodePos;
-	}
-
-	public void setKodePos(Integer kodePos) {
-		this.kodePos = kodePos;
 	}
 
 	@Column(name = "KELAS", length = 5)
@@ -201,6 +182,15 @@ public class Tmsiswa implements java.io.Serializable {
 
 	public void setAsalSekolah(String asalSekolah) {
 		this.asalSekolah = asalSekolah;
+	}
+
+	@Column(name = "STATUS", nullable = false, length = 10)
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

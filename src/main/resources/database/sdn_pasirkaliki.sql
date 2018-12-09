@@ -35,7 +35,6 @@ CREATE TABLE `tmguru` (
 /*Data for the table `tmguru` */
 
 insert  into `tmguru`(`ID_GURU`,`NIP`,`NAMA_GURU`,`ALAMAT`,`CREATED_BY`,`CREATED_DT`,`MODIFIED_BY`,`MODIFIED_DT`) values 
-('2','NIP0001','Fachrizal','Perumnas','Admin','2018-12-07 01:17:19',NULL,NULL),
 ('GU0001','20181209001','Abdul Aziz','Rawamerta','Admin','2018-12-06 22:08:50',NULL,NULL);
 
 /*Table structure for table `tmkelas` */
@@ -104,42 +103,42 @@ CREATE TABLE `tmsiswa` (
   `TGL_LAHIR` date default NULL,
   `AGAMA` varchar(20) default NULL,
   `ALAMAT` varchar(50) default NULL,
+  `KECAMATAN` varchar(50) default NULL,
+  `KODE_POS` int(6) default NULL,
   `KELAS` varchar(5) default NULL,
   `CREATED_BY` varchar(30) default NULL,
   `CREATED_DT` datetime default NULL,
   `MODIFIED_BY` varchar(30) default NULL,
   `MODIFIED_DT` datetime default NULL,
   `ASAL_SEKOLAH` varchar(50) default NULL,
-  `STATUS` varchar(10) NOT NULL,
-  PRIMARY KEY  (`NIS`,`NISN`),
-  KEY `TMSISWA_FK1` (`KELAS`)
+  PRIMARY KEY  (`NIS`,`NISN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `tmsiswa` */
 
-insert  into `tmsiswa`(`NIS`,`NISN`,`NAMA`,`JENIS_KELAMIN`,`TEMPAT_LAHIR`,`TGL_LAHIR`,`AGAMA`,`ALAMAT`,`KELAS`,`CREATED_BY`,`CREATED_DT`,`MODIFIED_BY`,`MODIFIED_DT`,`ASAL_SEKOLAH`,`STATUS`) values 
-('121301044','56155754','Rohendi','L','Karawang','2005-12-12','Islam','Pasirkaliki','6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Telukjambe I','baru'),
-('131401002','73148803','Alvia Jakariya','P','Karawang','2007-01-19','Islam','Pasirkaliki','1.a','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'baru'),
-('131401003','69606393','Andika','L','Karawang','2006-11-25','Islam','Pasirkaliki','2.a','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'naik kelas'),
-('131401009','72025998','Ferdinand Wiranta','L','Karawang','2007-07-29','Islam','Pasirkaliki','6.a','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Cengkong IV','naik kelas'),
-('131401010','63346569','Fitri Amelia','P','Karawang','2006-10-23','Islam','Pasirkaliki','6.a','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Telukjambe I','pindahan'),
-('131401015','79993737','Lisma Maelani','P','Karawang','2007-03-24','Islam','Pasirkaliki','2.b','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'pindahan'),
-('131401019','65667278','Mira Hilda Sari','P','Karawang','2006-06-12','Islam','Pasirkaliki','2.b','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'baru'),
-('131401020','61716053','Mohamad Rapli Handani','L','Karawang','2006-06-12','Islam','Pasirkaliki','3.b','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'naik kelas'),
-('131401024','67339223','Muhamad Rifki Anugrah','L','Karawang','2006-11-15','Islam','Pasirkaliki','6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Cengkong IV','naik kelas'),
-('131401025','68340067','Muhamad Saeful Rohman','L','Karawang','2006-05-02','Islam','Pasirkaliki','6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Telukjambe I','naik kelas'),
-('131401028','69495089','Nadya Khalisa Putri','P','Karawang','2006-12-26','Islam','Pasirkaliki','6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Lemahabang I','pindahan'),
-('131401031','69332162','Nova Rahmah','P','Karawang','2006-10-09','Islam','Pasirkaliki','6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Lemahabang I','pindahan'),
-('131401034','63976299','Rafli','L','Karawang','2006-05-17','Islam','Pasrkaliki','6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Lemahabang I','pindahan'),
-('131401040','79148098','Sahadah','P','Karawang','2007-03-02','Islam','Kutawargi','1.c','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'pindahan'),
-('131401048','72901721','Siti Patonah','P','Karawang','2007-10-21','Islam','Pasirkaliki','1.c','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'pindahan'),
-('131401049','76686466','Sri Rahayu Pratiwi','P','Karawang','2007-04-28','Islam','Pasirkaliki','2.c','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'pindahan'),
-('131401054','64027532','Wardiah','P','Karawang','2006-11-11','Islam','Pasirkaliki','3.c','Admin','2018-12-01 14:23:38',NULL,NULL,NULL,'baru'),
-('131401056','62930572','Wulan Sari','P','Karawang','2006-01-30','Islam','Pasirkaliki','6.c','Admin','2018-12-01 14:23:38',NULL,NULL,'SDN Lemahabang I','naik kelas'),
-('141502068','73238653','Alisya Salsabila','P','Karawang','2007-07-24','Islam','Pasirkaliki','1.a','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'naik kelas'),
-('151603063','65691208','Tasa Nur Muhamad','L','Karawang','2006-01-11','Islam','Pasirawi','3.c','Admin','2018-12-01 14:23:38',NULL,NULL,NULL,'pindahan'),
-('161704095','79548721','Febby Widyaningsih','P','Karawang','2007-02-01','Islam','Pasirkaliki','3.a','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'pindahan'),
-('181906092','75031397','Irli Tasya Prawesti','P','JAKARTA','2007-01-10','Islam','JURANG MANGU BARAT','1.b','Admin','2018-12-01 14:23:37',NULL,NULL,NULL,'pindahan');
+insert  into `tmsiswa`(`NIS`,`NISN`,`NAMA`,`JENIS_KELAMIN`,`TEMPAT_LAHIR`,`TGL_LAHIR`,`AGAMA`,`ALAMAT`,`KECAMATAN`,`KODE_POS`,`KELAS`,`CREATED_BY`,`CREATED_DT`,`MODIFIED_BY`,`MODIFIED_DT`,`ASAL_SEKOLAH`) values 
+('121301044','56155754','Rohendi','L','Karawang','2005-12-12','Islam','Pasirkaliki','Kec. Rawamerta',41382,'6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Telukjambe I\r\n'),
+('131401002','73148803','Alvia Jakariya','P','Karawang','2007-01-19','Islam','Pasirkaliki','Kec. Rawamerta',41382,'1.a','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('131401003','69606393','Andika','L','Karawang','2006-11-25','Islam','Pasirkaliki','Kec. Rawamerta',41382,'2.a','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('131401009','72025998','Ferdinand Wiranta','L','Karawang','2007-07-29','Islam','Pasirkaliki','Kec. Rawamerta',41382,'6.a','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Cengkong IV'),
+('131401010','63346569','Fitri Amelia','P','Karawang','2006-10-23','Islam','Pasirkaliki','Kec. Rawamerta',41382,'6.a','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Telukjambe I'),
+('131401015','79993737','Lisma Maelani','P','Karawang','2007-03-24','Islam','Pasirkaliki','Kec. Rawamerta',41382,'2.b','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('131401019','65667278','Mira Hilda Sari','P','Karawang','2006-06-12','Islam','Pasirkaliki','Kec. Rawamerta',41382,'2.b','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('131401020','61716053','Mohamad Rapli Handani','L','Karawang','2006-06-12','Islam','Pasirkaliki','Kec. Rawamerta',41382,'3.b','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('131401024','67339223','Muhamad Rifki Anugrah','L','Karawang','2006-11-15','Islam','Pasirkaliki','Kec. Rawamerta',41382,'6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Cengkong IV'),
+('131401025','68340067','Muhamad Saeful Rohman','L','Karawang','2006-05-02','Islam','Pasirkaliki','Kec. Rawamerta',41382,'6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Telukjambe I\r\n'),
+('131401028','69495089','Nadya Khalisa Putri','P','Karawang','2006-12-26','Islam','Pasirkaliki','Kec. Rawamerta',41382,'6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Lemahabang I\r\n'),
+('131401031','69332162','Nova Rahmah','P','Karawang','2006-10-09','Islam','Pasirkaliki','Kec. Rawamerta',41382,'6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Lemahabang I\r\n'),
+('131401034','63976299','Rafli','L','Karawang','2006-05-17','Islam','Pasrkaliki','Kec. Rawamerta',41382,'6.b','Admin','2018-12-01 14:23:37',NULL,NULL,'SDN Lemahabang I\r\n'),
+('131401040','79148098','Sahadah','P','Karawang','2007-03-02','Islam','Kutawargi','Kec. Rawamerta',41382,'1.c','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('131401048','72901721','Siti Patonah','P','Karawang','2007-10-21','Islam','Pasirkaliki','Kec. Rawamerta',41382,'1.c','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('131401049','76686466','Sri Rahayu Pratiwi','P','Karawang','2007-04-28','Islam','Pasirkaliki','Kec. Rawamerta',41382,'2.c','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('131401054','64027532','Wardiah','P','Karawang','2006-11-11','Islam','Pasirkaliki','Kec. Rawamerta',41382,'3.c','Admin','2018-12-01 14:23:38',NULL,NULL,NULL),
+('131401056','62930572','Wulan Sari','P','Karawang','2006-01-30','Islam','Pasirkaliki','Kec. Rawamerta',41382,'6.c','Admin','2018-12-01 14:23:38',NULL,NULL,'SDN Lemahabang I'),
+('141502068','73238653','Alisya Salsabila','P','Karawang','2007-07-24','Islam','Pasirkaliki','Kec. Rawamerta',41382,'1.a','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('151603063','65691208','Tasa Nur Muhamad','L','Karawang','2006-01-11','Islam','Pasirawi','Kec. Rawamerta',41382,'3.c','Admin','2018-12-01 14:23:38',NULL,NULL,NULL),
+('161704095','79548721','Febby Widyaningsih','P','Karawang','2007-02-01','Islam','Pasirkaliki','Kec. Rawamerta',41382,'3.a','Admin','2018-12-01 14:23:37',NULL,NULL,NULL),
+('181906092','75031397','Irli Tasya Prawesti','P','JAKARTA','2007-01-10','Islam','JURANG MANGU BARAT','Kec. Pondok Aren',15223,'1.b','Admin','2018-12-01 14:23:37',NULL,NULL,NULL);
 
 /*Table structure for table `tmwalisiswa` */
 

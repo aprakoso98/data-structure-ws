@@ -1,5 +1,5 @@
 package com.structure.data.model;
-// Generated Dec 6, 2018 11:18:35 PM by Hibernate Tools 4.3.5.Final
+// Generated Dec 8, 2018 2:09:31 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;

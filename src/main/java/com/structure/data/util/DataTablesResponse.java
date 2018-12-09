@@ -1,24 +1,26 @@
 package com.structure.data.util;
 
+import java.util.List;
+
 public class DataTablesResponse {
 
-	private String status;
-	private String message;
+	private List<String> column;
+	private List data;
 
-	public String getStatus() {
-		return status;
+	public List<String> getColumn() {
+		return column;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setColumn(List<String> column) {
+		this.column = column;
 	}
 
-	public String getMessage() {
-		return message;
+	public List getData() {
+		return data;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setData(List data) {
+		this.data = data;
 	}
 
 }

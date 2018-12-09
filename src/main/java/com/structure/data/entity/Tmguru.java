@@ -1,10 +1,19 @@
 package com.structure.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Tmguru {
 
+	@JsonProperty("ID Guru")
 	private String idGuru;
+
+	@JsonProperty("NIP")
 	private String nip;
+
+	@JsonProperty("Nama Guru")
 	private String namaGuru;
+
+	@JsonProperty("Alamat")
 	private String alamat;
 
 	public String getIdGuru() {

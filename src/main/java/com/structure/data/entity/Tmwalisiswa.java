@@ -1,19 +1,46 @@
 package com.structure.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Tmwalisiswa {
 
+	@JsonProperty("NIS")
 	private int nis;
+
+	@JsonProperty("Nama Ayah")
 	private String namaAyah;
+
+	@JsonProperty("Tahun Lahir Ayah")
 	private String tahunLahirAyah;
+
+	@JsonProperty("Pendidikan Ayah")
 	private String pendidikanAyah;
+
+	@JsonProperty("Pekerjaan Ayah")
 	private String pekerjaanAyah;
+
+	@JsonProperty("Penghasilan Min Ayah")
 	private Integer penghasilanMinAyah;
+
+	@JsonProperty("Penghasilan Max Ayah")
 	private Integer penghasilanMaxAyah;
+
+	@JsonProperty("Nama Ibu")
 	private String namaIbu;
+
+	@JsonProperty("Tahun Lahir Ibu")
 	private String tahunLahitIbu;
+
+	@JsonProperty("Pendidikan Ibu")
 	private String pendidikanIbu;
+
+	@JsonProperty("Pekerjaan Ibu")
 	private String pekerjaanIbu;
+
+	@JsonProperty("Penghasilan Min Ibu")
 	private Integer penghasilanMinIbu;
+
+	@JsonProperty("Penghasilan Max Ibu")
 	private Integer penghasilanMaxIbu;
 
 	public int getNis() {
