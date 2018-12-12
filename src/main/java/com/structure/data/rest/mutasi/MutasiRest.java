@@ -40,12 +40,20 @@ public class MutasiRest {
 	@Autowired
 	private DataSource ds;
 
-	@RequestMapping(value = "/export", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public ModelAndView exportMutasi(@RequestParam Map<String, Object> param) {
 		DataTablesRequest input = new DataTablesRequest();
-		List<com.structure.data.entity.MutasiSiswa> siswaDtos = new ArrayList<>();
 		input.setSearch(param);
-		List<Tmsiswa> tmsiswas = (List<Tmsiswa>) tmsiswaDao.findAll();
+		List<com.structure.data.entity.MutasiSiswa> siswaDtos = new ArrayList<>();
+		List<Tmsiswa> tmsiswas = new ArrayList<>();
+		Map<String, Object> src = new HashMap<>();
+		String searchStatus = input.getSearch().get("status") != null ? input.getSearch().get("status").toString() : "";
+		String status = getStatus(searchStatus);
+		if ("".equals(status)) {
+			tmsiswas = (List<Tmsiswa>) tmsiswaDao.findAll();
+		} else {
+			tmsiswas = (List<Tmsiswa>) tmsiswaDao.findByStatus(status);
+		}
 
 		for (Tmsiswa tmsiswa : tmsiswas) {
 			com.structure.data.entity.MutasiSiswa studentDto = new com.structure.data.entity.MutasiSiswa();
@@ -65,17 +73,18 @@ public class MutasiRest {
 			siswaDtos.add(studentDto);
 		}
 
-		Map<String, Object> src = new HashMap<>();
 		src.put("tx", siswaDtos);
 
 		return new ModelAndView(new MutasiExcelReportView() {
 		}, "param", src);
 	}
 
-//	@RequestMapping(value = "/print", method = RequestMethod.GET)
-	@RequestMapping(value = "/print", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ByteArrayResource> print(@RequestBody DataTablesRequest input)
+	@RequestMapping(value = "/print", method = RequestMethod.GET)
+	public ResponseEntity<ByteArrayResource> print(@RequestParam Map<String, Object> param)
 			throws JRException, SQLException {
+		DataTablesRequest input = new DataTablesRequest();
+		input.setSearch(param);
+
 		Map m = new HashMap();
 		m.put("PLOGO", "classpath:report/dinas.png");
 		m.put("PNISN", input.getSearch().get("nis").toString());
@@ -94,21 +103,18 @@ public class MutasiRest {
 			throws JRException, SQLException {
 		DataTablesRequest input = new DataTablesRequest();
 		input.setSearch(param);
-		Map m = new HashMap();
-		m.put("PLOGO", "classpath:report/dinas.png");
-		m.put("PNAMAMURID", "RIZAL");
-		m.put("PNISN", "NISN");
-		m.put("PJK", "LAKI-LAKI");
-		m.put("PKELAS", "6.A");
-		m.put("PNAMAWALI", "ROJALI");
-		m.put("PKERJA", "PENGUSAHA BATUBARA");
-		m.put("PSEKOLAH", "SDN Nagasari XII");
 
-		byte[] byteFile = generateJasperPdf("mutasi2.jasper", m);
+		Map m = new HashMap();
+		m.put("PLOMBA", input.getSearch().get("lomba").toString());
+		m.put("PCABANG", input.getSearch().get("cabang").toString());
+		m.put("PNIS", input.getSearch().get("nis").toString());
+		m.put("PTINGKAT", input.getSearch().get("tingkat").toString());
+
+		byte[] byteFile = generateJasperPdf("Lomba.jasper", m);
 		ByteArrayResource resource = new ByteArrayResource(byteFile);
 
 		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + "Mutasi_Siswa" + ".pdf")
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + "Lap_Lomba" + ".pdf")
 				.contentType(MediaType.APPLICATION_PDF).contentLength(byteFile.length).body(resource);
 	}
 
@@ -141,6 +147,18 @@ public class MutasiRest {
 		}
 
 		return JasperExportManager.exportReportToPdf(jasperPrint);
+	}
+
+	private String getStatus(String status) {
+		String result = "";
+		if ("1".equals(status)) {
+			result = "baru";
+		} else if ("2".equals(status)) {
+			result = "naik kelas";
+		} else if ("3".equals(status)) {
+			result = "pindahan";
+		}
+		return result;
 	}
 
 	/*

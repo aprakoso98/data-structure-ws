@@ -418,21 +418,14 @@
 		{
 			"name": "Service Export Mutasi Siswa",
 			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
+				"method": "GET",
+				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:20000/data-structure-ws/rest/mutasi/export",
+					"raw": "http://localhost:20000/data-structure-ws/rest/mutasi/export?status=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -443,30 +436,29 @@
 						"rest",
 						"mutasi",
 						"export"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "1"
+						}
 					]
 				},
-				"description": "Service untuk mengambil semua data guru"
+				"description": "Service untuk mengambil data siswa berdasarkan status.\n1 = siswa baru,\n2 = siswa naik kelas,\n3 = siswa pindahan"
 			},
 			"response": []
 		},
 		{
 			"name": "Service Export Siswa Pindah Sekolah",
 			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
+				"method": "GET",
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"search\":{\n\t\t\"nis\":\"131401002\",\n\t\t\"sekolah\":\"SDN Kertamulya 2\"\n\t}\n}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:20000/data-structure-ws/rest/mutasi/print",
+					"raw": "http://localhost:20000/data-structure-ws/rest/mutasi/print?nis=131401002&sekolah=SDN Pasir Kemuning II",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -477,6 +469,61 @@
 						"rest",
 						"mutasi",
 						"print"
+					],
+					"query": [
+						{
+							"key": "nis",
+							"value": "131401002"
+						},
+						{
+							"key": "sekolah",
+							"value": "SDN Pasir Kemuning II"
+						}
+					]
+				},
+				"description": "Service untuk mengambil semua data guru"
+			},
+			"response": []
+		},
+		{
+			"name": "Service Export Lomba",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:20000/data-structure-ws/rest/mutasi/lomba?nis=131401002&lomba=Lompat Jauh&cabang=Karawang&tingkat=Kecamatan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "20000",
+					"path": [
+						"data-structure-ws",
+						"rest",
+						"mutasi",
+						"lomba"
+					],
+					"query": [
+						{
+							"key": "nis",
+							"value": "131401002"
+						},
+						{
+							"key": "lomba",
+							"value": "Lompat Jauh"
+						},
+						{
+							"key": "cabang",
+							"value": "Karawang"
+						},
+						{
+							"key": "tingkat",
+							"value": "Kecamatan"
+						}
 					]
 				},
 				"description": "Service untuk mengambil semua data guru"
