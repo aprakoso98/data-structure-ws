@@ -417,11 +417,8 @@
 		},
 		{
 			"name": "Service Export Mutasi Siswa",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -446,6 +443,40 @@
 						"rest",
 						"mutasi",
 						"export"
+					]
+				},
+				"description": "Service untuk mengambil semua data guru"
+			},
+			"response": []
+		},
+		{
+			"name": "Service Export Siswa Pindah Sekolah",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"search\":{\n\t\t\"nis\":\"131401002\",\n\t\t\"sekolah\":\"SDN Kertamulya 2\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:20000/data-structure-ws/rest/mutasi/print",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "20000",
+					"path": [
+						"data-structure-ws",
+						"rest",
+						"mutasi",
+						"print"
 					]
 				},
 				"description": "Service untuk mengambil semua data guru"
