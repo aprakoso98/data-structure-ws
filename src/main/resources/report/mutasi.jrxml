@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2018-12-12T17:22:26 -->
+<!-- 2018-12-15T11:03:58 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mutasi" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="437c31b8-4e21-48be-954d-64e3577a80c5">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DB_MYSQL"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -12,25 +12,25 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<parameter name="PNAMAMURID" class="java.lang.String"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="PNISN" class="java.lang.String"/>
-	<parameter name="PJK" class="java.lang.String"/>
-	<parameter name="PKELAS" class="java.lang.String"/>
-	<parameter name="PNAMAWALI" class="java.lang.String"/>
-	<parameter name="PKERJA" class="java.lang.String"/>
 	<parameter name="PSEKOLAH" class="java.lang.String"/>
+	<parameter name="PLOGO" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT COUNT(0) FROM DUAL;]]>
+		<![CDATA[SELECT A.NAMA, A.NIS, A.JENIS_KELAMIN, A.KELAS, B.NAMA_AYAH, B.PEKERJAAN_AYAH FROM TMSISWA A
+LEFT JOIN TMWALISISWA B ON A.NIS = B.NIS WHERE B.NIS =  $P{PNISN}]]>
 	</queryString>
+	<field name="NAMA" class="java.lang.String"/>
+	<field name="NIS" class="java.lang.String"/>
+	<field name="JENIS_KELAMIN" class="java.lang.String"/>
+	<field name="KELAS" class="java.lang.String"/>
+	<field name="NAMA_AYAH" class="java.lang.String"/>
+	<field name="PEKERJAAN_AYAH" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="967" splitType="Stretch">
-			<image>
-				<reportElement x="20" y="-4" width="100" height="90" uuid="d8819926-225b-49c6-922a-65727048827b"/>
-				<imageExpression><![CDATA["dinas.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="97" y="1" width="433" height="55" uuid="c90b3eac-a013-4cce-8d69-896a48c1958b"/>
 				<textElement textAlignment="Center">
@@ -46,13 +46,6 @@ KORWIL CAMBIDIK KECAMATAN RAWAMERTA]]></text>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SDN PASIRKALIKI I]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="97" y="66" width="433" height="20" uuid="821f4bde-7e9e-4276-b8bf-63a37159eb59"/>
-				<textElement textAlignment="Center">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Dusun Sempur Desa Pasirkalki Kec. Rawamerta Kab. Karawang. Kode Pos ;41382]]></text>
 			</staticText>
 			<line>
 				<reportElement x="20" y="96" width="529" height="1" uuid="aad2c190-aa1e-4aca-8f8d-566fa7e360f8"/>
@@ -269,14 +262,6 @@ Alamat		: Pasirkaliki Kec. Rawamerta
 				</textElement>
 				<text><![CDATA[NIP.19650302 199009 2 003]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="22" y="610" width="518" height="50" uuid="66aed66e-8034-4260-b958-14c3dc5679e3"/>
-				<textElement textAlignment="Left">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Setelah anak tersebut diterima di sekolah ini, isian di bawah ini harap diisi dan lembar kedua dikirim kembali kepada kami.
-]]></text>
-			</staticText>
 			<line>
 				<reportElement x="30" y="648" width="518" height="1" uuid="e07ff779-5cff-404f-9a81-f6cedf0669ed"/>
 				<graphicElement>
@@ -425,7 +410,7 @@ NIP ............................................
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{PNAMAMURID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{NAMA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="225" y="289" width="179" height="18" uuid="e488cd90-f65e-418e-9e90-e6e4985f091c"/>
@@ -439,28 +424,28 @@ NIP ............................................
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{PJK}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["L".equals($F{JENIS_KELAMIN}) ? "Laki-laki" : "Perempuan"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="225" y="324" width="179" height="18" uuid="dd4f4817-aa0e-46fc-8494-5e1b24179458"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{PKELAS}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{KELAS}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="225" y="363" width="179" height="18" uuid="bf4e38c2-b1c4-45eb-9f29-148253c35e0a"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{PNAMAWALI}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{NAMA_AYAH}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="225" y="381" width="179" height="18" uuid="61aa0f42-a4ad-4ce1-bdde-dbde5755c6ad"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{PKERJA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{PEKERJAAN_AYAH}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="22" y="400" width="519" height="40" uuid="cf846215-97f9-4451-8a4a-703180ef2723"/>
@@ -469,6 +454,36 @@ NIP ............................................
 				</textElement>
 				<textFieldExpression><![CDATA["Telah mengajukan pindah sekolah ke " + $P{PSEKOLAH} + " dengan alasan Mengikuti Orang Tua. Bersama ini kami sertakan Nilai Harian dan permohonan pindah orang tua / wali murid."]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="22" y="610" width="518" height="50" uuid="66aed66e-8034-4260-b958-14c3dc5679e3"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Setelah anak tersebut diterima di sekolah ini, isian di bawah ini harap diisi dan lembar kedua dikirim kembali kepada kami.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="642" width="19" height="16" uuid="693d49b9-1907-472f-b49b-bd2b586ee9a8"/>
+				<textElement>
+					<font fontName="Wingdings" size="12"/>
+				</textElement>
+				<text><![CDATA["]]></text>
+			</staticText>
+			<image>
+				<reportElement x="12" y="-4" width="100" height="90" uuid="8aa18936-480b-420a-80fd-f3476611ebf3">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{PLOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="89" y="66" width="450" height="20" uuid="821f4bde-7e9e-4276-b8bf-63a37159eb59"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Dusun Sempur Desa Pasirkalki Kec. Rawamerta Kab. Karawang. Kode Pos : 41382]]></text>
+			</staticText>
 		</band>
 	</title>
 </jasperReport>

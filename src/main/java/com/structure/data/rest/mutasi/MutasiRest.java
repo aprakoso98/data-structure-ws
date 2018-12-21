@@ -3,6 +3,7 @@ package com.structure.data.rest.mutasi;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,15 +16,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.structure.data.model.Tmsiswa;
+import com.structure.data.model.Ttsiswahistory;
 import com.structure.data.mutasi.view.MutasiExcelReportView;
 import com.structure.data.repository.TmsiswaDao;
+import com.structure.data.repository.TtsiswahistoryDao;
 import com.structure.data.util.DataTablesRequest;
 
 import net.sf.jasperreports.engine.JRException;
@@ -38,6 +40,8 @@ public class MutasiRest {
 	@Autowired
 	private TmsiswaDao tmsiswaDao;
 	@Autowired
+	private TtsiswahistoryDao ttsiswahistoryDao;
+	@Autowired
 	private DataSource ds;
 
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
@@ -49,8 +53,8 @@ public class MutasiRest {
 		Map<String, Object> src = new HashMap<>();
 		String searchStatus = input.getSearch().get("status") != null ? input.getSearch().get("status").toString() : "";
 		String status = getStatus(searchStatus);
-		if ("".equals(status)) {
-			tmsiswas = (List<Tmsiswa>) tmsiswaDao.findAll();
+		if ("1".equals(status)) {
+			tmsiswas = (List<Tmsiswa>) tmsiswaDao.findByStatusMutasi();
 		} else {
 			tmsiswas = (List<Tmsiswa>) tmsiswaDao.findByStatus(status);
 		}
@@ -90,8 +94,26 @@ public class MutasiRest {
 		m.put("PNISN", input.getSearch().get("nis").toString());
 		m.put("PSEKOLAH", input.getSearch().get("sekolah").toString());
 
-		byte[] byteFile = generateJasperPdf("mutasi3.jasper", m);
+		byte[] byteFile = generateJasperPdf("Mutasi.jasper", m);
 		ByteArrayResource resource = new ByteArrayResource(byteFile);
+
+		Tmsiswa tmsiswa = tmsiswaDao.findById(input.getSearch().get("nis").toString());
+		if (tmsiswa != null) {
+			tmsiswa.setModifiedBy("Admin");
+			tmsiswa.setModifiedDt(new Date());
+			
+			tmsiswaDao.save(tmsiswa);
+			
+			Ttsiswahistory ttsiswahistory = new Ttsiswahistory();
+			ttsiswahistory.setNis(Integer.parseInt(tmsiswa.getId().getNis()));
+			ttsiswahistory.setNisn(Integer.parseInt(tmsiswa.getId().getNisn()));
+			ttsiswahistory.setStatus(tmsiswa.getStatus());
+			ttsiswahistory.setCreatedBy("Admin");
+			ttsiswahistory.setCreatedDt(new Date());
+			
+			ttsiswahistoryDao.save(ttsiswahistory);
+			
+		}
 
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + "Mutasi_Siswa" + ".pdf")
@@ -108,7 +130,7 @@ public class MutasiRest {
 		m.put("PLOMBA", input.getSearch().get("lomba").toString());
 		m.put("PCABANG", input.getSearch().get("cabang").toString());
 		m.put("PNIS", input.getSearch().get("nis").toString());
-		m.put("PTINGKAT", input.getSearch().get("tingkat").toString());
+		m.put("PTINGKAT", "Rawamerta");
 
 		byte[] byteFile = generateJasperPdf("Lomba.jasper", m);
 		ByteArrayResource resource = new ByteArrayResource(byteFile);
@@ -150,11 +172,9 @@ public class MutasiRest {
 	}
 
 	private String getStatus(String status) {
-		String result = "";
-		if ("1".equals(status)) {
+		String result = "1";
+		if ("2".equals(status)) {
 			result = "baru";
-		} else if ("2".equals(status)) {
-			result = "naik kelas";
 		} else if ("3".equals(status)) {
 			result = "pindahan";
 		}
